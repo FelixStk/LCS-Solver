@@ -1,0 +1,54 @@
+# C/C++ Code Style settings
+# To manually reformat a file: `clang-format -i --style=file <file>`
+# To format all files: `find . -name "*.cc" -o -name "*.h"  | xargs clang-format -i`
+
+BasedOnStyle: Google
+Language: Cpp
+AlignAfterOpenBracket: Align
+AlignTrailingComments: true
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBraces: Attach
+ColumnLimit: 80
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+DerivePointerAlignment: false
+FixNamespaceComments: true
+#IncludeBlocks: Preserve
+#IncludeCategories:
+#  - Regex: '^<.*\.h>'
+#    Priority: 1
+#  - Regex: '^"'
+#    Priority: 2
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^"([^/]+)\.h"'
+    Priority: 1
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: '^<(sys/|unistd\.|stdlib\.|stddef\.|[^.]+\.h)'
+    Priority: 3
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: '^<[^/]+>'
+    Priority: 4
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: '^<.+/'
+    Priority: 5
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: '^"'
+    Priority: 6
+    SortPriority: 0
+    CaseSensitive: false
+IndentWidth: 2
+PointerAlignment: Left
+#ReflowComments: IndentOnly
+SortIncludes: CaseSensitive
+SpaceAfterCStyleCast: true
+SpaceBeforeParens: ControlStatements
+Standard: Latest
+TabWidth: 2
+UseTab: Never

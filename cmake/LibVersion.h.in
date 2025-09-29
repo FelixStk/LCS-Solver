@@ -1,0 +1,20 @@
+#ifndef LCS_SOLVER_LIBVERSION_H_
+#define LCS_SOLVER_LIBVERSION_H_
+
+#define LIB_NAME "@PROJECT_NAME@"
+#define LCS_SOLVER_VERSION "@PROJECT_VERSION@"
+#define LCS_SOLVER_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define LCS_SOLVER_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define LCS_SOLVER_VERSION_PATCH @PROJECT_VERSION_PATCH@
+
+#include <string>
+
+namespace lcs_solver{
+
+inline std::string Name(){
+  return std::string(LIB_NAME) + " " + LCS_SOLVER_VERSION;
+}
+
+}// namespace lcs_solver
+
+#endif // LCS_SOLVER_LIBVERSION_H_

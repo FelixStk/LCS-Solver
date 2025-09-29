@@ -1,0 +1,36 @@
+{
+  "data": {
+    "gap_": [
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "gap_lower_bound_": 0,
+    "gap_max_length_": 8,
+    "gap_num_uniques_": 1,
+    "gap_upper_bound_": 8,
+    "t_": 6
+  },
+  "identifier": "Constraint_MC"
+}

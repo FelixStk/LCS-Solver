@@ -1,0 +1,90 @@
+{
+  "adapter": {
+    "Files": [
+      "res/file1.cc",
+      "res/file2.cc"
+    ],
+    "MapR": [
+      [
+        107,
+        "  sum = items.front() + calculateTotal(items.subspan(1));"
+      ],
+      [
+        106,
+        "  if (items.empty()) return sum;"
+      ],
+      [
+        105,
+        ""
+      ],
+      [
+        104,
+        "#include <span>"
+      ],
+      [
+        103,
+        "}"
+      ],
+      [
+        102,
+        "  return sum;"
+      ],
+      [
+        101,
+        "  }"
+      ],
+      [
+        100,
+        "    sum += number;"
+      ],
+      [
+        99,
+        "  for (int number : items) {"
+      ],
+      [
+        98,
+        "  int sum = 0;"
+      ],
+      [
+        97,
+        "int calculateTotal(const std::span<int> items) {"
+      ]
+    ]
+  },
+  "constraint": {
+    "data": {
+      "gap_": [
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          8
+        ]
+      ],
+      "gap_lower_bound_": 0,
+      "gap_max_length_": 8,
+      "gap_num_uniques_": 1,
+      "gap_upper_bound_": 8,
+      "t_": 6
+    },
+    "identifier": "Constraint_MC"
+  }
+}

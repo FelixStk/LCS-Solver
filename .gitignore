@@ -1,0 +1,9 @@
+build/
+.vscode/
+cmake-build-debug/
+cmake-build-release/
+cmake-build-debug-mingw/
+cmake-build-debug-wsl/
+docs/html/*
+.idea/
+*-checkpoint.ipynb
