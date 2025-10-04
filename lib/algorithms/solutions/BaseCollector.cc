@@ -8,6 +8,7 @@
 #include "algorithms/solutions/BaseCollector.h"
 
 // #include <iostream>
+#include <algorithm>
 #include <sstream>
 
 namespace lcs_solver::algorithms::solutions {
@@ -15,6 +16,17 @@ namespace lcs_solver::algorithms::solutions {
 //// Public ////////////////////////////////////////////////////////////////////
 BaseSolution::SolutionType BaseCollector::getType() const {
   return BaseSolution::SolutionType::Collector;
+}
+
+bool BaseCollector::isSubset(const BaseSolution& rhs) const {
+  if (const auto rhs_ptr = dynamic_cast<const BaseCollector*>(&rhs)) {
+    auto this_set = genSet(this);
+    auto super_set = genSet(rhs_ptr);
+    return std::ranges::all_of(this_set, [&](const auto& this_sol) {
+      return super_set.contains(this_sol);
+    });
+  }
+  return false;
 }
 
 std::string BaseCollector::DebugString() const {

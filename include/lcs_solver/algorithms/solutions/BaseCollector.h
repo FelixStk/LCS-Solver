@@ -22,9 +22,10 @@ class BaseCollector : public BaseSolution {
   [[nodiscard]] std::string DebugString() const final;
   [[nodiscard]] bool empty() const final;
   [[nodiscard]] SolutionType getType() const final;
+  [[nodiscard]] bool isSubset(const BaseSolution &rhs) const;
 
   private:
-  static std::set<AnyIterator::value_type> genSet(BaseCollector* p);
+  // static std::set<AnyIterator::value_type> genSet(BaseCollector* p);
   [[nodiscard]] bool isEqual(const BaseSolution &rhs) const override;
   [[nodiscard]] bool isLessThan(const BaseSolution &rhs) const override;
   [[nodiscard]] bool isLessEqualThan(const BaseSolution &rhs) const override;
