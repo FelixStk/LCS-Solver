@@ -107,8 +107,8 @@ std::unique_ptr<BaseSolution> LLCS2_MC_O1_SYNC::query() {
   reset(ResetLevel::Full);
   if (!isValid()) return std::make_unique<solutions::EmptySolution>();
   doPreprocessing();
-  //return std::make_unique<UnsignedSolution>(findMaxIn3DMatrix(M));
-  return std::make_unique<solutions::UnsignedSolution>(R[m][n]);
+  return std::make_unique<solutions::UnsignedSolution>(findMaxIn3DMatrix(M));
+  // return std::make_unique<solutions::UnsignedSolution>(R[m][n]);
 }
 
 /*******************************************************************************
@@ -185,17 +185,24 @@ void LLCS2_MC_O1_SYNC::doPreprocessing() {
       // Compute set max_r = max_{rp in [h], label[m_rp+1]=r} for all r in [h]
       for (uint r = 0; r < h; ++r) {
         if (Phi(i, j)) {
-          if (mp[r] == C.size()) {
-            R[i][j] = std::max<uint>(R[i][j], 1 + mp[r]);
-          }
-          uint maxr = 0;
-          for (uint rp = 0; rp < h; ++rp) {
-            if (label[mp[rp]] == r)
-              maxr = std::max<uint>(maxr, mp[rp]);
-          }
-          M[r][i][j] = maxr + 1;
-          if (trackKeyPairs) track({i, j}, M[r][i][j]);
-          R[i][j] = std::max<uint>(R[i][j], M[r][i][j]);
+            uint maxr = 0;
+            for (uint index_in_cs = 0; index_in_cs < h; ++index_in_cs) {
+              const uint candidate_length = mp[index_in_cs];
+              if (candidate_length > 0) {
+                const uint candidate_index_in_cs = label[candidate_length-1];
+                if (mp[candidate_index_in_cs] == candidate_length) {
+                  maxr = std::max<uint>(maxr, candidate_length);
+                }
+              }
+            }
+            M[r][i][j] = maxr + 1;
+
+            // Tracking of points M[r][i][j]
+            const uint& len = M[r][i][j];
+            const Pair idx = {i, j};
+            const bool do_update = keyPairs[len].empty() || (keyPairs[len].back() != idx);
+            if (trackKeyPairs && do_update) track(idx, len);
+            R[i][j] = std::max<uint>(R[i][j], M[r][i][j]);
         } else if (i > 0 && j > 0) {
           R[i][j] = std::max<uint>(R[i - 1][j], R[i][j - 1]);
         }
@@ -250,11 +257,11 @@ std::string LLCS2_MC_O1_SYNC::DebugString() const {
   } else {
     uint r = 0;
     for (const auto &mat2D : M) {
-      std::string name = "M[r == " + std::to_string(r++) + "]";
-      oss << toString(mat2D, s, false, name, true) << "\n";
+      std::string matrix_name = "M[r == " + std::to_string(r++) + "]";
+      oss << toString(mat2D, s, false, matrix_name, true) << "\n";
     }
   }
-  oss << toString(R, s, false, "R", true) << "\n";
+  // oss << toString(R, s, false, "R", true) << "\n";
   oss << "Maximum is: " << findMaxIn3DMatrix(M) << "\n";
   oss << toString(keyPairs, trackKeyPairs) << "\n";
   return oss.str();
